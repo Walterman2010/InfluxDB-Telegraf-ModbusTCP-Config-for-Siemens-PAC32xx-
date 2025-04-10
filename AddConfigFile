@@ -1,0 +1,54 @@
+# To Add in Telegraf Config File
+# Modbus Integration for Siemens PAC3200
+
+# Activate the ModbusTCP on the Mesurement Device and Add it to Conroller
+# controller = "tcp://xxx.xxx.xxx.xxx:502" 
+# You can finde the information about in PAC 3200 in the handbook, its interressting at page 38 following
+# https://cache.industry.siemens.com/dl/files/150/26504150/att_906559/v1/A5E01168664A-04_DE_122016_201612221316291494.pdf
+
+# Holding Register:
+# measurement: the Name of your Device. it is the name, how you can find it in the InfluxDB as measurement
+# name: the name of the Physical Mesurementvalue (in this case in German). seh in the Handbook for more informations
+# byte_order: sayed how are the Value ar stored in the adress (and also the Sice)
+# data_type: depent what type of value it is. The most types are a kind off Real or floats also FLOAT32-IEEE
+# scale: say something about the commerposition
+# address: where it is stored. in the Document is only given the start adress and the number oh registers. in the most cases there are 2 registes, also we need to add the following register the the adress
+
+
+[[inputs.modbus]]
+  name = "Energiemessung"
+  slave_id = 1
+  timeout = "1s"
+  controller = "tcp://192.168.1.123:502"
+  debug_connection = false
+ 
+  holding_registers = [
+    {measurement = "Verbrauchsmessung_Nr1", name = "Spannung_U-L1", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [1,2]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Spannung_U-L2", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [3,4]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Spannung_U-L3", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [5,6]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Spannung_U-L1-L2", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [7,8]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Spannung_U-L2-L3", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [9,10]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Spannung_U-L3-L1", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [11,12]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Strom_I-L1", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [13,14]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Strom_I-L2", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [15,16]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Strom_I-L3", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [17,18]},
+	  {measurement = "Verbrauchsmessung_Nr1", name = "Scheinleistung_S-L1", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [19,20]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Scheinleistung_S-L2", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [21,22]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Scheinleistung_S-L3", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [23,24]},
+	  {measurement = "Verbrauchsmessung_Nr1", name = "Wirkleistung_P-L1", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [25,26]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Wirkleistung_P-L2", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [27,28]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Wirkleistung_P-L3", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [29,30]},
+	  {measurement = "Verbrauchsmessung_Nr1", name = "Leistungsfaktor_phi-L1", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [37,38]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Leistungsfaktor_phi-L2", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [39,40]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Leistungsfaktor_phi-L3", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [41,42]},
+	  {measurement = "Verbrauchsmessung_Nr1", name = "Frequenz_f", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [55,56]},
+	  {measurement = "Verbrauchsmessung_Nr1", name = "Mittel_U-LN", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [57,58]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Mittel_U-LL", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [59,60]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Mittel_I", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [61,62]},
+	  {measurement = "Verbrauchsmessung_Nr1", name = "Summe_Scheinleistung", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [63,64]},
+	  {measurement = "Verbrauchsmessung_Nr1", name = "Summe_Wirkleistung", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [65,66]},
+	  {measurement = "Verbrauchsmessung_Nr1", name = "AmpSymetrie_U", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [71,72]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "AmpSymetrie_I", byte_order = "ABCD", data_type = "FLOAT32-IEEE", scale=1.0, address = [73,74]},
+  	{measurement = "Verbrauchsmessung_Nr1", name = "Wirkarbeit", byte_order = "ABCDEFGH", data_type = "FLOAT64-IEEE", scale=0.001, address = [801,802,803,804]},
+    {measurement = "Verbrauchsmessung_Nr1", name = "Scheinarbeit", byte_order = "ABCDEFGH", data_type = "FLOAT64-IEEE", scale=0.001, address = [833,834,835,836]},
+  ]
