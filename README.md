@@ -17,7 +17,7 @@ EN: https://cache.industry.siemens.com/dl/files/150/26504150/att_906558/v1/A5E01
 DE: https://cache.industry.siemens.com/dl/files/307/109767307/att_984482/v1/MAN_L1V30425208E-01_de_de-DE.pdf
 EN: https://cache.industry.siemens.com/dl/files/307/109767307/att_1298442/v1/MAN_L1V30425208F_RS-AA_002_en_en-US.pdf
 
- Holding Register:
+# Holding Register:
  measurement: the Name of your Device. it is the name, how you can find it in the InfluxDB as measurement
  name: the name of the Physical Mesurementvalue (in this case in German). seh in the Handbook for more informations
  byte_order: sayed how are the Value ar stored in the adress (and also the Sice)
